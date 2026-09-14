@@ -1,0 +1,697 @@
+/* =========================================================
+   ALGOLENS — Minimal Black / Developer UI
+   ========================================================= */
+
+:root {
+    --bg: #0a0a0a;
+    --surface: #101010;
+    --surface-2: #151515;
+    --border: #242424;
+    --border-hover: #353535;
+
+    --text: #f2f2f2;
+    --text-dim: #9a9a9a;
+    --text-muted: #5f5f5f;
+
+    --accent: #d9d9d9;
+    --green: #7dd3a8;
+    --yellow: #d7b56d;
+    --red: #d98282;
+
+    --radius: 6px;
+    --mono: "SF Mono", "JetBrains Mono", "Cascadia Code",
+            "Roboto Mono", ui-monospace, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Inter",
+            "Segoe UI", sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    width: 440px;
+    height: 500px;
+    min-width: 340px;
+    min-height: 300px;
+
+    background: var(--bg);
+    color: var(--text);
+
+    font-family: var(--sans);
+    font-size: 13px;
+    line-height: 1.5;
+
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
+    -webkit-font-smoothing: antialiased;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.al-header {
+    height: 52px;
+    padding: 0 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+
+    flex-shrink: 0;
+}
+
+.al-logo {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.al-logo-icon {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text);
+}
+
+.al-logo-text {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    color: var(--text);
+}
+
+/* =========================================================
+   MAIN
+   ========================================================= */
+
+.al-main {
+    padding: 16px;
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.al-state {
+    animation: fadeIn 0.16s ease-out;
+}
+
+.hidden {
+    display: none !important;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(3px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================================================
+   LOADING
+   ========================================================= */
+
+#state-loading {
+    min-height: 300px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+}
+
+.al-spinner {
+    width: 16px;
+    height: 16px;
+
+    border: 2px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+
+    animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.al-state-text {
+    color: var(--text-dim);
+    font-size: 11px;
+}
+
+/* =========================================================
+   EMPTY / ERROR
+   ========================================================= */
+
+#state-no-problem,
+#state-error {
+    min-height: 300px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+    gap: 7px;
+}
+
+.al-empty-icon {
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 5px;
+
+    border: 1px solid var(--border);
+    border-radius: 50%;
+
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--text-dim);
+}
+
+.al-state-title {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+
+
+.al-btn {
+    margin-top: 12px;
+    padding: 7px 14px;
+
+    background: var(--text);
+    color: #090909;
+
+    border: 0;
+    border-radius: 4px;
+
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+}
+
+.al-btn:hover {
+    opacity: 0.82;
+}
+
+/* =========================================================
+   PROBLEM INFO
+   ========================================================= */
+
+.al-problem-info {
+    margin-bottom: 14px;
+    padding-bottom: 13px;
+
+    border-bottom: 1px solid var(--border);
+}
+
+.al-problem-title {
+    margin-bottom: 8px;
+
+    color: var(--text);
+
+    font-family: var(--mono);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.4;
+
+    letter-spacing: -0.01em;
+}
+
+.al-problem-meta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.al-badge {
+    padding: 2px 7px;
+
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+
+    color: var(--text-dim);
+
+    font-family: var(--mono);
+    font-size: 9px;
+    font-weight: 600;
+}
+
+.al-badge[data-difficulty="Easy"] {
+    color: var(--green);
+}
+
+.al-badge[data-difficulty="Medium"] {
+    color: var(--yellow);
+}
+
+.al-badge[data-difficulty="Hard"] {
+    color: var(--red);
+}
+
+.al-badge-cache {
+    color: var(--text-dim) !important;
+}
+
+/* =========================================================
+   APPROACH TABLE
+   ========================================================= */
+
+.al-table-wrapper {
+    overflow: hidden;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
+
+.al-table {
+    width: 100%;
+    border-collapse: collapse;
+
+    font-family: var(--mono);
+    font-size: 11px;
+}
+
+.al-table thead {
+    background: #0d0d0d;
+    border-bottom: 1px solid var(--border);
+}
+
+.al-table th {
+    padding: 8px 9px;
+
+    text-align: left;
+
+    color: var(--text-muted);
+
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+
+    white-space: nowrap;
+}
+
+.al-th-rank {
+    width: 28px;
+    padding-right: 0 !important;
+}
+
+.al-th-time,
+.al-th-space {
+    width: 70px;
+}
+
+.al-th-rating {
+    width: 88px;
+    text-align: right !important;
+}
+
+.al-table tbody tr {
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+
+    transition: background 0.12s ease;
+}
+
+.al-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.al-table tbody tr:hover {
+    background: var(--surface-2);
+}
+
+.al-table td {
+    padding: 11px 9px;
+    vertical-align: middle;
+    color: var(--text);
+}
+
+.al-td-rank {
+    color: var(--text-muted);
+
+    font-size: 10px;
+    text-align: center;
+
+    padding-right: 0 !important;
+}
+
+.al-td-rank.star {
+    color: var(--text);
+    background: transparent;
+    width: auto;
+    height: auto;
+    display: table-cell;
+    font-size: 11px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.al-td-approach {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.35;
+}
+
+.al-td-time,
+.al-td-space {
+    color: var(--text-dim);
+    font-family: var(--mono);
+    font-size: 10px;
+}
+
+.al-td-rating {
+    text-align: right;
+}
+
+/* =========================================================
+   RATING
+   ========================================================= */
+
+.al-rating {
+    display: inline-block;
+
+    padding: 2px 6px;
+
+    border: 1px solid var(--border);
+    border-radius: 3px;
+
+    font-family: var(--mono);
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.al-rating.interview {
+    color: var(--green);
+    border-color: rgba(125, 211, 168, 0.28);
+}
+
+.al-rating.acceptable {
+    color: var(--text-dim);
+}
+
+.al-rating.avoid {
+    color: var(--text-muted);
+}
+
+/* =========================================================
+   FOOTNOTE
+   ========================================================= */
+
+.al-footnote {
+    margin-top: 9px;
+
+    color: var(--text-muted);
+
+    font-family: var(--mono);
+    font-size: 9px;
+    text-align: center;
+}
+
+/* =========================================================
+   MODAL
+   ========================================================= */
+
+.al-modal-overlay {
+    position: fixed;
+    inset: 0;
+
+    z-index: 1000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 14px;
+
+    background: rgba(0, 0, 0, 0.82);
+
+    animation: overlayIn 0.12s ease;
+}
+
+@keyframes overlayIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.al-modal {
+    width: 100%;
+    max-width: 380px;
+    max-height: 90vh;
+
+    padding: 17px;
+
+    overflow-y: auto;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border-hover);
+    border-radius: var(--radius);
+
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
+
+    animation: modalIn 0.14s ease-out;
+}
+
+@keyframes modalIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.al-modal-close {
+    position: absolute;
+    top: 11px;
+    right: 11px;
+
+    width: 24px;
+    height: 24px;
+
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+
+    color: var(--text-muted);
+
+    cursor: pointer;
+
+    font-family: var(--mono);
+    font-size: 10px;
+
+    transition: all 0.12s ease;
+}
+
+.al-modal-close:hover {
+    color: var(--text);
+    background: var(--surface-2);
+    border-color: var(--border-hover);
+}
+
+.al-modal-title {
+    margin-bottom: 16px;
+    padding-right: 30px;
+
+    color: var(--text);
+
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.al-modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+
+.al-modal-section {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.al-modal-section-label {
+    color: var(--text-muted);
+
+    font-family: var(--mono);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+}
+
+.al-modal-section-content {
+    color: var(--text-dim);
+
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.al-modal-pseudocode {
+    padding: 10px 11px;
+
+    background: #0b0b0b;
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--text-dim);
+    border-radius: 4px;
+
+    color: var(--text-dim);
+
+    font-family: var(--mono);
+    font-size: 10px;
+    line-height: 1.7;
+
+    white-space: pre-wrap;
+    overflow-x: auto;
+}
+
+.al-modal-complexity {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.al-modal-complexity-item {
+    padding: 9px 10px;
+
+    background: #0b0b0b;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.al-modal-complexity-label {
+    color: var(--text-muted);
+
+    font-family: var(--mono);
+    font-size: 8px;
+    text-transform: uppercase;
+}
+
+.al-modal-complexity-value {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.al-modal-complexity-value.tc {
+    color: var(--text);
+}
+
+.al-modal-complexity-value.sc {
+    color: var(--text-dim);
+}
+
+/* =========================================================
+   RESIZE HANDLE
+   ========================================================= */
+
+.al-resize-handle {
+    position: fixed;
+    right: 4px;
+    bottom: 4px;
+
+    width: 14px;
+    height: 14px;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+
+    color: var(--text-muted);
+
+    opacity: 0.35;
+    cursor: nwse-resize;
+
+    user-select: none;
+    z-index: 100;
+}
+
+.al-resize-handle:hover {
+    opacity: 0.8;
+    color: var(--text);
+}
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-hover);
+    border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+    }
+}
