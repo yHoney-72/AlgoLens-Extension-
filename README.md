@@ -1,18 +1,18 @@
 # AlgoLens
 
-AlgoLens is a Chrome extension that helps developers understand LeetCode
-problems by comparing algorithmic approaches, time complexity, and space
-complexity.
+AlgoLens is a Manifest V3 Chrome extension that helps developers understand
+LeetCode problems by comparing algorithmic approaches, time complexity,
+and space complexity.
 
 ## Features
 
-- Automatically detects the current LeetCode problem.
+- Detects the current LeetCode problem.
 - Sends problem information to the AlgoLens backend.
 - Displays AI-generated algorithmic approaches.
 - Compares time and space complexity.
 - Highlights recommended approaches.
 - Displays cached results when available.
-- Provides retry support when analysis fails.
+- Supports retries when analysis fails.
 
 ## Architecture
 
@@ -25,27 +25,45 @@ LeetCode Problem
 ## Requirements
 
 - Google Chrome or a compatible Chromium browser.
-- Internet connection.
-- Access to the AlgoLens backend.
+- Node.js 24.20.0 for tests and validation.
+- Docker for container-based validation.
+- Internet access to use the deployed backend.
 
-## Installation
+## Install the Extension
 
 1. Clone or download this repository.
 2. Open chrome://extensions in Chrome.
 3. Enable Developer mode.
 4. Click Load unpacked.
-5. Select the algolens-extension directory.
-6. Open a LeetCode problem and use the AlgoLens extension.
+5. Select the repository directory.
+6. Open a supported LeetCode problem and use AlgoLens.
 
 ## Backend
 
-The extension currently uses the following API endpoint:
+The extension currently calls:
 
 https://algolens-backend-qsz2.onrender.com/api/solve
 
-## Testing
+## Test
 
-Automated tests will be documented here once the test suite is configured.
+Run the automated tests:
+
+    npm test
+
+Run JavaScript syntax checks and tests:
+
+    npm run check
+
+Build and run the validation container:
+
+    docker build -t algolens-extension .
+    docker run --rm algolens-extension
+
+## Configuration
+
+No environment variables are currently required by the extension's test setup.
+The backend endpoint is configured in background.js. Do not commit API keys,
+database credentials, or other secrets.
 
 ## Privacy
 
