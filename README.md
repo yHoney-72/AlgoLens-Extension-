@@ -1,41 +1,52 @@
 # AlgoLens
 
-> AI-powered Chrome extension that helps developers understand and compare different approaches to LeetCode problems.
+AlgoLens is a Chrome extension that helps developers understand LeetCode
+problems by comparing algorithmic approaches, time complexity, and space
+complexity.
 
-AlgoLens analyzes the current LeetCode problem and presents multiple possible approaches, ranked from the most optimal to the brute-force solution.
+## Features
 
-The goal is simple: **understand not just what solution works, but which approach is better and why.**
+- Automatically detects the current LeetCode problem.
+- Sends problem information to the AlgoLens backend.
+- Displays AI-generated algorithmic approaches.
+- Compares time and space complexity.
+- Highlights recommended approaches.
+- Displays cached results when available.
+- Provides retry support when analysis fails.
 
----
+## Architecture
 
-## ✨ Features
-
-- 🔍 Automatically detects the current LeetCode problem
-- 🤖 AI-powered approach analysis
-- 📊 Compares multiple approaches
-- ⏱️ Time complexity comparison
-- 💾 Space complexity comparison
-- ⭐ Highlights the recommended approach
-- ⚡ Displays cached results when available
-- 📝 Detailed explanation for every approach
-- 🖤 Minimal developer-focused UI
-- 🔄 Retry support when analysis fails
-
----
-
-## 🧠 How It Works
-
-```text
 LeetCode Problem
-       ↓
-Chrome Extension
-       ↓
-Extract Problem Information
-       ↓
-AlgoLens Backend
-       ↓
-Gemini AI
-       ↓
-Approach Analysis
-       ↓
-Extension UI
+    -> Chrome Extension
+    -> AlgoLens Backend
+    -> AI Analysis
+    -> Extension UI
+
+## Requirements
+
+- Google Chrome or a compatible Chromium browser.
+- Internet connection.
+- Access to the AlgoLens backend.
+
+## Installation
+
+1. Clone or download this repository.
+2. Open chrome://extensions in Chrome.
+3. Enable Developer mode.
+4. Click Load unpacked.
+5. Select the algolens-extension directory.
+6. Open a LeetCode problem and use the AlgoLens extension.
+
+## Backend
+
+The extension currently uses the following API endpoint:
+
+https://algolens-backend-qsz2.onrender.com/api/solve
+
+## Testing
+
+Automated tests will be documented here once the test suite is configured.
+
+## Privacy
+
+See [PRIVACY.md](PRIVACY.md) for privacy information.
